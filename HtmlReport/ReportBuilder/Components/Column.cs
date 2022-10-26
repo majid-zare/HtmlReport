@@ -19,7 +19,7 @@ public class Column : BaseComponent
 
     public override void Render(StringBuilder sb)
     {
-        sb.Append($"<div class=\"col col-{GetColumnSize()} {RenderCssClasses()}\">");
+        sb.Append($"<div {RenderCssClasses("col", $"col-{GetColumnSize()}")}>");
         RenderChildren(sb);
         sb.Append("</div>");
     }

@@ -19,7 +19,7 @@ namespace HtmlReport
             _encoding = encoding;
         }
 
-        public byte[] RenderHtmlToPdf(string htmlContent)
+        public byte[] ExportToPdf(ReportBuilder.Components.HtmlReport htmlReport)
         {
             var doc = new HtmlToPdfDocument
             {
@@ -35,7 +35,7 @@ namespace HtmlReport
                     new ObjectSettings
                     {
                         PagesCount = null,
-                        HtmlContent = BuildHtmlPage(htmlContent),
+                        HtmlContent = BuildHtmlPage(htmlReport.RenderAsHtml()),
                         WebSettings = { DefaultEncoding = "utf-8" }
                     }
                 }
@@ -51,7 +51,7 @@ namespace HtmlReport
             return _pdfConverter.Convert(doc);
         }
 
-        private string BuildHtmlPage(string html)
+        private string BuildHtmlPage(string? html)
         {
             var sb = new StringBuilder();
             sb.Append(@"<html>");

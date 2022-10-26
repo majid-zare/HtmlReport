@@ -6,7 +6,7 @@ public class Row: BaseComponent
 {
     public override void Render(StringBuilder sb)
     {
-        sb.Append($"<div class=\"row {RenderCssClasses()}\">");
+        sb.Append($"<div {RenderCssClasses("row")}>");
         RenderChildren(sb);
         sb.Append("</div>");
     }

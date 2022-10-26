@@ -17,8 +17,14 @@ public abstract class BaseComponent
         }
     }
 
-    protected string RenderCssClasses()
+    protected string RenderCssClasses(params string[] cssClass)
     {
-        return String.Join(" ", CssClasses);
+        var result = CssClasses.Union(cssClass).ToArray();
+        if (result.Any())
+        {
+            return $"class=\"{String.Join(" ", result)}\"";
+        }
+
+        return String.Empty;
     }
 }

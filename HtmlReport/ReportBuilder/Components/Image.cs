@@ -13,6 +13,6 @@ public class Image : BaseComponent
 
     public override void Render(StringBuilder sb)
     {
-        sb.Append($"<div class=\"{RenderCssClasses()}\"><img src=\"data:image/png;base64,{ImageData}\" /></div>");
+        sb.Append($"<div {RenderCssClasses()}><img src=\"data:image/png;base64,{ImageData}\" /></div>");
     }
 }

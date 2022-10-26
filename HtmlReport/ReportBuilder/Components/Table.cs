@@ -8,7 +8,7 @@ public class Table : BaseComponent
 
     public override void Render(StringBuilder sb)
     {
-        sb.Append($"<table class=\"table {RenderCssClasses()}\">");
+        sb.Append($"<table {RenderCssClasses("table")}>");
         if (Header != null)
         {
             sb.Append("<thead>");

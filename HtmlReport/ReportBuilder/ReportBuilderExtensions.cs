@@ -90,9 +90,34 @@ public static class ReportBuilderExtensions
         return item;
     }
 
-    public static T AddSpaceBottom<T>(this T element, byte value) where T : BaseComponent
+    public static T AddMargin<T>(this T element, byte value, Direction? direction = null) where T : BaseComponent
     {
-        element.CssClasses.Add($"mb-{value}");
+        var dir = direction switch
+        {
+            Direction.Top => "t",
+            Direction.Bottom => "b",
+            Direction.Left => "l",
+            Direction.Right => "r",
+            _ => "a"
+        };
+
+        element.CssClasses.Add($"m{dir}-{value}");
+        return element;
+    }
+
+
+    public static T AddPadding<T>(this T element, byte value, Direction? direction = null) where T : BaseComponent
+    {
+        var dir = direction switch
+        {
+            Direction.Top => "t",
+            Direction.Bottom => "b",
+            Direction.Left => "l",
+            Direction.Right => "r",
+            _ => "a"
+        };
+
+        element.CssClasses.Add($"p{dir}-{value}");
         return element;
     }
 
@@ -121,23 +146,16 @@ public static class ReportBuilderExtensions
         return item;
     }
 
-    public static TableRow AddRow(this Table table, params string[] cellValues)
+    public static TableCell AddImage(this TableCell cell, string base64ImageData, string[]? cssClasses = null)
     {
-        var item = new TableRow();
-        foreach (var value in cellValues)
+        var img = new Image(base64ImageData);
+        if (cssClasses != null)
         {
-            item.Children.Add(new TableCell(value));
+            img.CssClasses.AddRange(cssClasses);
         }
 
-        table.Children.Add(item);
-        return item;
-    }
-
-    public static TableRow AddTextCell(this TableRow row, string value)
-    {
-        var item = new TableCell(value);
-        row.Children.Add(item);
-        return row;
+        cell.Children.Add(img);
+        return cell;
     }
 
     public static TableRow AddCell(this TableRow row, Action<TableCell> configurator)
@@ -145,6 +163,19 @@ public static class ReportBuilderExtensions
         var item = new TableCell();
         configurator(item);
         row.Children.Add(item);
+        return row;
+    }
+
+    public static TableRow AddCells(this TableRow row, params string[]? cellsValue)
+    {
+        if (cellsValue != null)
+        {
+            foreach (var value in cellsValue)
+            {
+                row.Children.Add(new TableCell(value));
+            }
+        }
+        
         return row;
     }
 

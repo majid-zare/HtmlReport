@@ -19,6 +19,6 @@ public class Heading : BaseComponent
 
     public override void Render(StringBuilder sb)
     {
-        sb.Append($"<h{(byte)Size} class=\"{RenderCssClasses()}\">{Content}</h{(byte)Size}>");
+        sb.Append($"<h{(byte)Size} {RenderCssClasses()}>{Content}</h{(byte)Size}>");
     }
 }
