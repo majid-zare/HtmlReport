@@ -17,22 +17,18 @@ var htmlToPdfExporter = new HtmlToPdfExporter(converter, assetsPath);
 
 var report = new HtmlReport.ReportBuilder.Components.HtmlReport();
 
-var testData = new List<ReportData>
-{
-    new("Majid", "Zare"),
-    new("Majid", "Zare"),
-    new("Majid", "Zare"),
-};
+var firstPageHeaderTable = new Table();
+firstPageHeaderTable.AddRow().AddCells("Cell 1","Cell 2", "Cell 3").AddCell(x=> x.AddImage(image).AddPadding(2,Direction.Left)).AddCells("Cell 5");
+
+var allPageHeaderTable = new Table();
+allPageHeaderTable.AddRow().AddCells("AllPageHeader").AddCell(x => x.AddImage(image).AddPadding(2, Direction.Left));
 
 
-var headerTable = new Table();
-headerTable.AddRow().AddCells("Cell 1","Cell 2", "Cell 3").AddCell(x=> x.AddImage(image).AddPadding(2,Direction.Left)).AddCells("Cell 5");
-
-
-for (int i = 0; i < 10; i++)
+for (int i = 0; i < 5; i++)
 {
     var page = new ReportPage();
-    page.AddFirstPageHeader(headerTable);
+    page.AddFirstPageHeader(firstPageHeaderTable);
+    page.AddAllPageHeader(allPageHeaderTable);
 
     page.AddHeading("Heading Size H6", HeadingSize.H6);
 
@@ -41,10 +37,9 @@ for (int i = 0; i < 10; i++)
         .AddMargin(6, Direction.Bottom)
         .AddHeader("FirstName", "LastName");
 
-
-    foreach (var item in testData)
+    for (int j = 0; j < 100; j++)
     {
-        table.AddRow().AddCells(item.FirstName, item.LastName);
+        table.AddRow().AddCells($"FirstName_{i}", $"LastName_{i}");
     }
 
     page.AddRow().AddTextColumn("CurrentUserName", "Mr Test");

@@ -169,7 +169,7 @@ function splitPage(index, page, maxHeight) {
 
 $(function() {
     $('.page').each(function(i, item) {
-        var splittedPage = splitPage(i, $(item), 1250);
+        var splittedPage = splitPage(i, $(item), 1300);
         $(item).replaceWith(splittedPage);
     });
 });

@@ -12,7 +12,7 @@ public class ReportPage: BaseComponent
     {
         sb.AppendLine("<div class=\"page\">");
         RenderChildren(sb);
-        sb.AppendFormat("<table class=\"footer-section\"><tbody><tr><td>{0}</td><td><span class=\"page-no\"></td></tr></tbody></table>", _footerValue);
+        sb.AppendFormat("<table class=\"footer-section\"><tbody><tr><td><span class=\"page-no\"></td><td>{0}</td></tr></tbody></table>", _footerValue);
 
         if (_firstPageHeader != null)
         {
