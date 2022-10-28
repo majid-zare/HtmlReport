@@ -9,8 +9,8 @@ const string image = @"iVBORw0KGgoAAAANSUhEUgAAAJYAAAAzCAYAAAB10PG/AAAAAXNSR0IAr
 var converter = new SynchronizedConverter(new PdfTools());
 var assetsPath = new List<string>
 {
-    $"{Environment.CurrentDirectory}/assets/global.css",
-    $"{Environment.CurrentDirectory}/assets/jquery.js"
+   Path.Combine(Environment.CurrentDirectory,"assets","global.css"),
+   Path.Combine(Environment.CurrentDirectory,"assets","jquery.js")
 };
 
 var htmlToPdfExporter = new HtmlToPdfExporter(converter, assetsPath);
@@ -18,7 +18,7 @@ var htmlToPdfExporter = new HtmlToPdfExporter(converter, assetsPath);
 var report = new HtmlReport.ReportBuilder.Components.HtmlReport();
 
 var firstPageHeaderTable = new Table();
-firstPageHeaderTable.AddRow().AddCells("Cell 1","Cell 2", "Cell 3").AddCell(x=> x.AddImage(image).AddPadding(2,Direction.Left)).AddCells("Cell 5");
+firstPageHeaderTable.AddRow().AddCells("Cell 1", "Cell 2", "Cell 3").AddCell(x => x.AddImage(image).AddPadding(2, Direction.Left)).AddCells("Cell 5");
 
 var allPageHeaderTable = new Table();
 allPageHeaderTable.AddRow().AddCells("AllPageHeader").AddCell(x => x.AddImage(image).AddPadding(2, Direction.Left));
@@ -53,5 +53,3 @@ var bytes = htmlToPdfExporter.ExportToPdf(report);
 
 File.WriteAllBytes(@"output.pdf", bytes);
 
-
-internal record ReportData(string FirstName, string LastName);
